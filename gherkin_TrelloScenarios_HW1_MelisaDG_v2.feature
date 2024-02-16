@@ -9,23 +9,6 @@ When I enter "mymail@somedomain.com" in the "Enter your email" field
 * I click the "Log in" button
 Then I should see my welcome page
 
-@positive scenario
-Scenario: Enable the Sign in registered user with Slack account page
-Given I am on the Sign in Trello page
-When I click the "Slack" button
-And "the your-workspace" field is enabled in Slack login page
-And I click the "Continue" button
-Then "Sing In With Google" field is enabled in Slack login page
-
-@positive scenario
-Scenario: Sign in registered user with Slack account
-Given Sign in Trello page
-When  I click the "Sing In With Email" button
-* I select my email in the list
-* "Enter password" field is enabled
-* I click the "Continue" button
-Then I should see my welcome page
-
 @negative scenario
 Scenario: Sign in as a non-registered user
 Given I am on the Sign in Trello page
@@ -35,8 +18,30 @@ When I enter "mymail@somedomain.com" in the "Enter your email" field
 * I click the "Log in" button
 Then Validate the error message "Incorrect email address and / or password. If you recently migrated your Trello account to an Atlassian account, you will need to use your Atlassian account password. Alternatively, you can get help logging in."
 
+
 @positive scenario
-Scenario: Create a new board as a new user
+Scenario: Enable the Sign in registered user with Slack account page
+Given I am on the Sign in Trello page
+When I click the "Slack" button
+* The "your-workspace" field is enabled in Slack login page
+* I enter "my-work-space" in the "Work-Space" field
+* I click the "Continue" button
+Then "Sing In With Google" field is enabled in Slack login page
+
+@positive scenario
+Scenario: Sign in with Slack account and gmail account registered user
+Given I am on the Sign in registered user with Slack account page
+When  I click the "Sing In With Email" button
+* I select my email in the list
+* "Enter password" field is enabled
+* I click the "Continue" button
+Then I should see my welcome page
+
+
+Feature: Creating elements in My new Trello account.
+
+@positive scenario
+Scenario: Create a new board
 Given I am on my new Trello account
 When I click the "Create your first board"
 * A pop-up field is enabled
@@ -44,12 +49,8 @@ When I click the "Create your first board"
 * the "Create" button is enabled
 Then I should see my new board
 
-
-Feature: Creating elements in My new Trello account.
-
-
 @negative scenario
-Scenario: Create a new board as a new user
+Scenario: Create a new board
 Given I am on my new Trello account
 When I click the "Create your first board" button
 * A pop-up field is enabled
