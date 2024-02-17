@@ -57,11 +57,6 @@ class CreateElements {
         await this.addListButton.click()
     }
 
-    // async openRandomBoard(listPosition) {
-    //     await this.openBoard[listPosition].waitForDisplayed()
-    //     await this.openBoard[listPosition].click()
-    // }
-
 }
 
 

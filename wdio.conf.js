@@ -27,7 +27,8 @@ exports.config = {
     ],
     // Patterns to exclude.
     exclude: [
-        './test/specs/login.spec.js'
+        //'./test/specs/create_elements.spec.js',
+       // './test/specs/login.spec.js'
     ],
     //
     // ============
@@ -52,30 +53,32 @@ exports.config = {
     // https://saucelabs.com/platform/platform-configurator
     //
     capabilities: [
+        {
+            browserName: 'chrome',
+            'goog:chromeOptions': {
+                args: ['--start-maximized', '--incognito'
+                    // , 'headless'
+                ]
+            }
+        }
+        ,
         // {
-        //     browserName: 'chrome',
-        //     'goog:chromeOptions': {
-        //         args: ['--start-maximized', '--incognito'
-        //             // , 'headless'
+        //     browserName: 'firefox',
+        //     'moz:firefoxOptions': {
+        //         args: ['--start-maximized', '--private-window'
+        //             //    ,'-headless'
         //         ]
         //     }
         // }
         // ,
         {
-            browserName: 'firefox',
-            'moz:firefoxOptions': {
-                args: ['--start-maximized', '--private-window'
-                    //    ,'-headless'
-                ]
+            browserName: 'msedge',
+            'ms:edgeOptions': {
+               args: ['--start-maximized', '--inprivate'
+                // , 'headless'
+            ]
             }
-        }
-        // ,
-        // {
-        //     browserName: 'msedge',
-        //     'ms:edgeOptions': {
-        //         args: ['--headless']
-        //     }
-        // }               
+        }               
     ],
     //
     // ===================
@@ -124,7 +127,7 @@ exports.config = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    services: ['chromedriver', 'geckodriver'],
+    services: ['vscode'],
 
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
@@ -134,9 +137,8 @@ exports.config = {
     // before running any tests.
     framework: 'mocha',
 
-
     //The number of times to retry the entire specfile when it fails as a whole
-    //specFileRetries: 1,
+    specFileRetries: 1,
 
     // Delay in seconds between the spec file retry attempts
     specFileRetriesDelay: 0,

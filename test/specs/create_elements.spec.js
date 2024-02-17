@@ -6,27 +6,34 @@ describe('Creating elements in My new Trello account', () => {
         await createElements.setCredentials("testmelisadominguez@gmail.com", "TestMelisa-02142024.")
     })
 
-    it.skip('Create a new board', async ()=>{
+    it('Create a new board', async ()=>{
         const newName = 'My board nro '+ Math.floor(Math.random()*100)
         await createElements.createCard(newName)
         const boardName = await createElements.newBoardDisplayName.getText()
         expect(boardName).toEqual(newName)
     })
 
-    it.skip('Error message - create a new board', async ()=>{
+    it('Error message - create a new board', async ()=>{
         await createElements.createCard(' ')
         const errorBoardName = await createElements.warningBoardName.getText()
         expect(errorBoardName).toHaveTextContaining('Board title is required')
     })
 
-    it.skip('Create a new list on "My new board" board', async ()=>{
-        const newList = 'My list nro '+ Math.floor(Math.random()*100)
+    it('Create a new list on "My new board" board', async ()=>{
+        let newList = 'My list nro '+ Math.floor(Math.random()*100)
         await createElements.openFirstBoard()
         await createElements.addNewlist(newList)
-        const listLength = await createElements.namesList.length
-        const lastChildList = await createElements.namesList[listLength-1].$('h2')
-        const textList = await lastChildList.getText()
-        expect(textList).toEqual(newList)
+        let listLength = await createElements.namesList.length
+        let lastChildList = await createElements.namesList[listLength-1].$('h2')
+        let textList = await lastChildList.getText()
+        await browser.waitUntil(async ()=>{
+            return (await  textList === newList)
+        }, {
+            timeout: 3500,
+            timeoutMsg: 'Expected to be Equal'
+        })
+        //await browser.pause(5000)
+        expect(textList).toEqual(newList) // acá pasa algo con los nombres cuando se comparan
     })
 
     it('Create a new card in a existing random list', async ()=>{
@@ -46,6 +53,5 @@ describe('Creating elements in My new Trello account', () => {
         const cardLastChild = await createElements.cardPosition[cardListLength-1]
         const cardText = await cardLastChild.getText()
         expect(cardText).toEqual(newCard)
-        //await browser.pause(5000)
     })
 })
