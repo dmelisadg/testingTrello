@@ -27,7 +27,7 @@ exports.config = {
     ],
     // Patterns to exclude.
     exclude: [
-        //'./test/specs/test.spec.js'
+        './test/specs/login.spec.js'
     ],
     //
     // ============
@@ -52,23 +52,24 @@ exports.config = {
     // https://saucelabs.com/platform/platform-configurator
     //
     capabilities: [
+        // {
+        //     browserName: 'chrome',
+        //     'goog:chromeOptions': {
+        //         args: ['--start-maximized', '--incognito'
+        //             // , 'headless'
+        //         ]
+        //     }
+        // }
+        // ,
         {
-            browserName: 'chrome',
-            'goog:chromeOptions': {
-                args: ['--start-maximized', '--incognito'
-                    // , 'headless'
+            browserName: 'firefox',
+            'moz:firefoxOptions': {
+                args: ['--start-maximized', '--private-window'
+                    //    ,'-headless'
                 ]
             }
         }
         // ,
-        // {
-        //     browserName: 'firefox',
-        //     'moz:firefoxOptions': {
-        //         args: ['--start-maximized', '--private-window'
-        //             //    ,'-headless'
-        //         ]
-        //     }
-        // },
         // {
         //     browserName: 'msedge',
         //     'ms:edgeOptions': {

@@ -71,8 +71,5 @@ class LoginPage {
         await this.cookiesButton.click()       
         await this.acceptContinueSlackButton.click();
     }
-
-
-
 }
 module.exports = new LoginPage;
