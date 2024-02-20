@@ -24,6 +24,14 @@ class LoginPage {
 
     get slackInputWorkSpace() { return $('input[data-qa="signin_domain_input"]') }
 
+    get passwordSlackButton() { return $('a[data-qa="sign_in_password_link"]') }
+
+    get emailField() { return $('input#email') }
+
+    get passwordField() { return $('input#password') }
+
+    get buttonSignIn() { return $('button#signin_btn') }
+
     get signInGmailButton() { return $('span.c-google_login__label') }
 
     get emailGmailAccount() { return $('input#identifierId') }
@@ -32,12 +40,14 @@ class LoginPage {
 
     get emailGmailPassword() { return $('input[name="Passwd"]') }
 
-    get nextGmailPaswordButton() {return $('#passwordNext')}
+    get nextGmailPaswordButton() { return $('#passwordNext') }
 
     get nextSlackButton() { return $$('span.VfPpkd-vQzf8d')[1] }
 
-    get acceptContinueSlackButton() { return $('.p-oauth_footer button.c-button.c-button--primary.c-button--medium.p-oauth_footer__accept_btn')} 
-    get cookiesButton() {return $('#onetrust-accept-btn-handler')}
+
+    get acceptContinueSlackButton() { return $('.p-oauth_footer button.c-button.c-button--primary.c-button--medium.p-oauth_footer__accept_btn') }
+
+    get cookiesButton() { return $('#onetrust-accept-btn-handler') }
 
     openTrello() {
         return page.openLogin()
@@ -46,11 +56,11 @@ class LoginPage {
     async setCredentials(username, password) {
         await this.enterEmail.waitForDisplayed();
         await this.enterEmail.setValue(username);
-        await this.continueButton.waitForDisplayed();
+        await this.continueButton.waitForClickable({ timeout: 20000 });
         await this.continueButton.click();
         await this.enterPassword.waitForDisplayed();
         await this.enterPassword.setValue(password);
-        await this.loginButton.waitForDisplayed();
+        await this.loginButton.waitForClickable({ timeout: 20000 });
         await this.loginButton.click();
     }
 
@@ -62,18 +72,17 @@ class LoginPage {
     }
 
     async loginSlackFromGmail(username, password) {
-        await this.signInGmailButton.click()
-        await this.emailGmailAccount.setValue(username);
-        await this.nextGmailButton.click();
-        await this.emailGmailPassword.setValue(password);
-        await this.nextGmailPaswordButton.waitForClickable({timeout:20000});
-        await this.nextGmailPaswordButton.click();
-        await this.nextSlackButton.waitForClickable({timeout:20000});
-        await this.nextSlackButton.click();
-        await this.cookiesButton.waitForClickable({timeout:20000});
-        await this.cookiesButton.click()   
-        await this.acceptContinueSlackButton.waitForClickable({timeout:20000});   
+        await this.cookiesButton.waitForClickable({ timeout: 20000 });
+        await this.cookiesButton.click()
+        await this.passwordSlackButton.waitForClickable({ timeout: 20000 });
+        await this.passwordSlackButton.click()
+        await this.emailField.setValue(username);
+        await this.passwordField.setValue(password);
+        await this.buttonSignIn.waitForClickable({ timeout: 20000 });
+        await this.buttonSignIn.click()
+        await this.acceptContinueSlackButton.waitForClickable({ timeout: 20000 });
         await this.acceptContinueSlackButton.click();
     }
+
 }
 module.exports = new LoginPage;

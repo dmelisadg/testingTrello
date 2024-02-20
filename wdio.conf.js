@@ -56,24 +56,26 @@ exports.config = {
         {
             browserName: 'chrome',
             'goog:chromeOptions': {
-                args: ['--start-maximized', '--incognito', '--headless'
+                args: ['--start-maximized', '--incognito'
+                // , '--headless'
                 ]
             }
         }
         ,
-        // {
-        //     browserName: 'firefox',
-        //     'moz:firefoxOptions': {
-        //         args: ['--start-maximized', '--private-window'
-        //             //    ,'-headless'
-        //         ]
-        //     }
-        // }
-        // ,
+        {
+            browserName: 'firefox',
+            'moz:firefoxOptions': {
+                args: ['--start-maximized', '--private-window'
+                    //    ,'--headless'
+                ]
+            }
+        }
+        ,
         {
             browserName: 'msedge',
             'ms:edgeOptions': {
-               args: ['--start-maximized', '--inprivate' , 'headless'
+               args: ['--start-maximized', '--inprivate' 
+            //    , '--headless'
             ]
             }
         }               

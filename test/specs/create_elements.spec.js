@@ -1,9 +1,10 @@
 const createElements = require('../pageObjects/create_elements.page')
+const loginPage = require('../pageObjects/login.page')
 
 describe('Creating elements in My new Trello account', () => {
     beforeEach(async () => {
-        await createElements.openTrello()
-        await createElements.setCredentials("testmelisadominguez@gmail.com", "TestMelisa-02142024.")
+        await loginPage.openTrello()
+        await loginPage.setCredentials("testmelisadominguez@gmail.com", "TestMelisa-02142024.")
     })
 
     it('Create a new board', async ()=>{
@@ -32,7 +33,6 @@ describe('Creating elements in My new Trello account', () => {
             timeout: 3500,
             timeoutMsg: 'Expected to be Equal'
         })
-        //await browser.pause(5000)
         expect(textList).toEqual(newList) // acá pasa algo con los nombres cuando se comparan
     })
 

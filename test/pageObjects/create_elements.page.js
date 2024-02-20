@@ -32,12 +32,6 @@ class CreateElements {
 
     get cardPosition() {return $$('li.bi0h3HALKXjfDq')[0].$$('a.NdQKKfeqJDDdX3')}
 
-    openTrello() {
-        return loginPage.openTrello()
-    }
-    setCredentials(username, password) {
-        return loginPage.setCredentials(username, password)
-    }
 
     async createCard(cardname){
         await this.newBoardButton.click()
