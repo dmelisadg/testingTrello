@@ -28,7 +28,7 @@ exports.config = {
     // Patterns to exclude.
     exclude: [
         //'./test/specs/create_elements.spec.js',
-       // './test/specs/login.spec.js'
+       //'./test/specs/login.spec.js'
     ],
     //
     // ============
@@ -56,8 +56,7 @@ exports.config = {
         {
             browserName: 'chrome',
             'goog:chromeOptions': {
-                args: ['--start-maximized', '--incognito'
-                // , '--headless'
+                args: ['--start-maximized', '--incognito' , '--headless'
                 ]
             }
         }
@@ -65,8 +64,7 @@ exports.config = {
         {
             browserName: 'firefox',
             'moz:firefoxOptions': {
-                args: ['--start-maximized', '--private-window'
-                    //    ,'--headless'
+                args: ['--start-maximized', '--private-window'  ,'--headless'
                 ]
             }
         }
@@ -74,8 +72,7 @@ exports.config = {
         {
             browserName: 'msedge',
             'ms:edgeOptions': {
-               args: ['--start-maximized', '--inprivate' 
-            //    , '--headless'
+               args: ['--start-maximized', '--inprivate'  , '--headless'
             ]
             }
         }               

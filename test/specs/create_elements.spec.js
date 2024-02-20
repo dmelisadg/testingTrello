@@ -54,4 +54,8 @@ describe('Creating elements in My new Trello account', () => {
         const cardText = await cardLastChild.getText()
         expect(cardText).toEqual(newCard)
     })
+
+    afterEach(async () => {
+        await createElements.endSession()
+    })
 })

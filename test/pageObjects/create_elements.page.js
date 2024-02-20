@@ -35,6 +35,7 @@ class CreateElements {
 
     async createCard(cardname){
         await this.newBoardButton.click()
+        await this.newBoardNameInput.waitForDisplayed()
         await this.newBoardNameInput.setValue(cardname)
         await this.newBoardCreateButton.waitForDisplayed()
         await this.newBoardCreateButton.click()
@@ -49,6 +50,20 @@ class CreateElements {
         await this.addAListButton.click()
         await this.listNameInput.setValue(listname)
         await this.addListButton.click()
+    }
+
+    async endSession(){
+        const profile = await $('[data-testid="header-member-menu-button"]')
+        await profile.waitForClickable({timeout:10000})
+        await profile.click()
+        const displayMenu = await $('[data-testid="account-menu"]')
+        await displayMenu.waitForDisplayed()
+        const logOutButton = await $('[data-testid="account-menu-logout"]')
+        await logOutButton.click()
+        const logOutAtlassianButton = await $('[data-testid="logout-button"]')
+        await logOutAtlassianButton.waitForClickable({timeout:10000})
+        await logOutAtlassianButton.click()
+        await browser.pause(5000)
     }
 
 }
