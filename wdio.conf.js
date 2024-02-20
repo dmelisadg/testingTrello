@@ -56,8 +56,7 @@ exports.config = {
         {
             browserName: 'chrome',
             'goog:chromeOptions': {
-                args: ['--start-maximized', '--incognito'
-                    // , 'headless'
+                args: ['--start-maximized', '--incognito', '--headless'
                 ]
             }
         }
@@ -74,8 +73,7 @@ exports.config = {
         {
             browserName: 'msedge',
             'ms:edgeOptions': {
-               args: ['--start-maximized', '--inprivate'
-                // , 'headless'
+               args: ['--start-maximized', '--inprivate' , 'headless'
             ]
             }
         }               
