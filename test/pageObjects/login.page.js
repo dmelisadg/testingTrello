@@ -66,9 +66,13 @@ class LoginPage {
         await this.emailGmailAccount.setValue(username);
         await this.nextGmailButton.click();
         await this.emailGmailPassword.setValue(password);
+        await this.nextGmailPaswordButton.waitForClickable({timeout:20000});
         await this.nextGmailPaswordButton.click();
+        await this.nextSlackButton.waitForClickable({timeout:20000});
         await this.nextSlackButton.click();
-        await this.cookiesButton.click()       
+        await this.cookiesButton.waitForClickable({timeout:20000});
+        await this.cookiesButton.click()   
+        await this.acceptContinueSlackButton.waitForClickable({timeout:20000});   
         await this.acceptContinueSlackButton.click();
     }
 }
