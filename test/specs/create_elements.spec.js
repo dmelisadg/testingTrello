@@ -7,17 +7,19 @@ describe('Creating elements in My new Trello account', () => {
         await loginPage.setCredentials("testmelisadominguez@gmail.com", "TestMelisa-02142024.")
     })
 
-    it('Create a new board', async ()=>{
+    it('Create a new board', async function (){
+        this.retries(1)
         const newName = 'My board nro '+ Math.floor(Math.random()*100)
         await createElements.createCard(newName)
         const boardName = await createElements.newBoardDisplayName.getText()
-        expect(boardName).toEqual(newName)
+        expect(boardName).to.equal(newName)
     })
 
-    it('Error message - create a new board', async ()=>{
+    it('Error message - create a new board',  async function (){
+        this.retries(1)
         await createElements.createCard(' ')
         const errorBoardName = await createElements.warningBoardName.getText()
-        expect(errorBoardName).toHaveTextContaining('Board title is required')
+        expect(errorBoardName).to.equal('Board title is required')
     })
 
     it('Create a new list on "My new board" board', async ()=>{
@@ -33,7 +35,7 @@ describe('Creating elements in My new Trello account', () => {
             timeout: 3500,
             timeoutMsg: 'Expected to be Equal'
         })
-        expect(textList).toEqual(newList) // acá pasa algo con los nombres cuando se comparan
+        expect(textList).to.equal(newList) // acá pasa algo con los nombres cuando se comparan
     })
 
     it('Create a new card in a existing random list', async ()=>{
@@ -52,7 +54,7 @@ describe('Creating elements in My new Trello account', () => {
         const cardListLength = await createElements.cardPosition.length
         const cardLastChild = await createElements.cardPosition[cardListLength-1]
         const cardText = await cardLastChild.getText()
-        expect(cardText).toEqual(newCard)
+        expect(cardText).to.equal(newCard)
     })
 
     afterEach(async () => {

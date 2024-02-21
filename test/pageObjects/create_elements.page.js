@@ -1,4 +1,3 @@
-const loginPage = require('../pageObjects/login.page');
 
 class CreateElements {
 
@@ -10,7 +9,7 @@ class CreateElements {
 
     get newBoardDisplayName() { return $('h1[data-testid="board-name-display"]')}
 
-    get warningBoardName() {return $('span[class="O45xR3m3EpkbfR"]')}
+    get warningBoardName() {return $('div.AOsf5x5baMpD1a p')}
 
     get openBoard() {return $('ul.boards-page-board-section-list').$$('li.boards-page-board-section-list-item')}
 
@@ -34,6 +33,7 @@ class CreateElements {
 
 
     async createCard(cardname){
+        await this.newBoardButton.waitForDisplayed()
         await this.newBoardButton.click()
         await this.newBoardNameInput.waitForDisplayed()
         await this.newBoardNameInput.setValue(cardname)
