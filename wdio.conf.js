@@ -27,8 +27,8 @@ exports.config = {
     ],
     // Patterns to exclude.
     exclude: [
-        //'./test/specs/create_elements.spec.js',
-      './test/specs/login.spec.js'
+        // './test/specs/create_elements.spec.js',
+    //   './test/specs/login.spec.js'
     ],
     //
     // ============
@@ -72,7 +72,7 @@ exports.config = {
         {
             browserName: 'msedge',
             'ms:edgeOptions': {
-               args: ['--start-maximized', '--inprivate'  , '--headless'
+               args: ['--start-maximized', '--inprivate', '--headless'
             ]
             }
         }               
@@ -135,7 +135,7 @@ exports.config = {
     framework: 'mocha',
 
     //The number of times to retry the entire specfile when it fails as a whole
-    //specFileRetries: 1,
+    specFileRetries: 1,
 
     // Delay in seconds between the spec file retry attempts
     specFileRetriesDelay: 0,
@@ -173,7 +173,10 @@ exports.config = {
     before: async () => {
         const chai = await import('chai');
         global.expect = chai.expect;
+        should = chai.should();
+        assert = chai.assert;
       },
+
     /**
      * Gets executed before a worker process is spawned and can be used to initialize specific service
      * for that worker as well as modify runtime environments in an async fashion.

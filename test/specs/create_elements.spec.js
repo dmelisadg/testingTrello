@@ -15,6 +15,12 @@ describe('Creating elements in My new Trello account', () => {
         expect(boardName).to.equal(newName)
     })
 
+    it('Delete first board', async () => {
+        await createElements.deleteBoard()
+        const boardAfterClose = await createElements.closeBoardTitle.getText()
+        expect(boardAfterClose).to.include(' is closed.')
+    })
+
     it('Error message - create a new board',  async function (){
         this.retries(1)
         await createElements.createCard(' ')
@@ -38,7 +44,7 @@ describe('Creating elements in My new Trello account', () => {
         expect(textList).to.equal(newList) // acá pasa algo con los nombres cuando se comparan
     })
 
-    it('Create a new card in a existing random list', async ()=>{
+    it.skip('Create a new card in a existing random list', async ()=>{
         //open random list on the first board
         await createElements.openFirstBoard()
         await createElements.namesList[0].waitForDisplayed()

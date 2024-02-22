@@ -2,19 +2,20 @@ const loginPage = require('../pageObjects/login.page')
 
 
 describe('Trello Sing-in page', () => {
+
     beforeEach(async () => {
         await loginPage.openTrello()
     })
     it('Sign in as a registered user', async () => {
         await loginPage.setCredentials('testmelisadominguez@gmail.com', 'TestMelisa-02142024.')
         const titleWelcome = await loginPage.titleWelcomePage.getAttribute('title')
-        expect(titleWelcome).to.equal('Test MelisaDG (testmelisadg)')
+        titleWelcome.should.equal('Test MelisaDG (testmelisadg)')
     })
 
     it('Sign in as non-registered user', async () => {
-        await loginPage.setCredentials('mymail@somedomain.com', '123456789')
+        await loginPage.setCredentials('mymail@gmail.com', '9876543***$%')
         const errorMessage = await loginPage.errorBox.getText()
-        expect(errorMessage).to.equal('Incorrect email address and / or password. If you recently migrated your Trello account to an Atlassian account, you will need to use your Atlassian account password. Alternatively, you can get help logging in.')
+        assert.equal(errorMessage,'Incorrect email address and / or password. If you recently migrated your Trello account to an Atlassian account, you will need to use your Atlassian account password. Alternatively, you can get help logging in.')
     })
 })
 

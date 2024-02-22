@@ -19,6 +19,7 @@
     "chromedriver": "^121.0.2",
     "geckodriver": "^4.3.2",
     "wdio-chromedriver-service": "^8.1.1",
+    "wdio-edgedriver-service": "^3.0.3",
     "wdio-geckodriver-service": "^5.0.2",
     "wdio-vscode-service": "^5.2.3"
   },
