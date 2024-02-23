@@ -44,7 +44,7 @@ describe('Creating elements in My new Trello account', () => {
         expect(textList).to.equal(newList) // acá pasa algo con los nombres cuando se comparan
     })
 
-    it.skip('Create a new card in a existing random list', async ()=>{
+    it('Create a new card in a existing random list', async ()=>{
         //open random list on the first board
         await createElements.openFirstBoard()
         await createElements.namesList[0].waitForDisplayed()
