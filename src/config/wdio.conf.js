@@ -22,13 +22,13 @@ exports.config = {
     // of the config file unless it's absolute.
     //
     specs: [
-        './test/specs/**/*.js'
+        './../tests/**/*.js'
 
     ],
     // Patterns to exclude.
     exclude: [
-        // './test/specs/create_elements.spec.js',
-    //   './test/specs/login.spec.js'
+        //    './../tests/create_elements.spec.js',
+        './../tests/login.spec.js'
     ],
     //
     // ============
@@ -56,26 +56,27 @@ exports.config = {
         {
             browserName: 'chrome',
             'goog:chromeOptions': {
-                args: ['--start-maximized', '--incognito', '--headless'
+                args: ['--start-maximized', '--incognito'
+                    // , '--headless'
                 ]
             }
         }
-        ,
-        {
-            browserName: 'firefox',
-            'moz:firefoxOptions': {
-                args: ['--start-maximized', '--private-window','--headless'
-                ]
-            }
-        }
-        ,
-        {
-            browserName: 'msedge',
-            'ms:edgeOptions': {
-               args: ['--start-maximized', '--inprivate', '--headless'
-            ]
-            }
-        }               
+        // ,
+        // {
+        //     browserName: 'firefox',
+        //     'moz:firefoxOptions': {
+        //         args: ['--start-maximized', '--private-window','--headless'
+        //         ]
+        //     }
+        // }
+        // ,
+        // {
+        //     browserName: 'msedge',
+        //     'ms:edgeOptions': {
+        //        args: ['--start-maximized', '--inprivate', '--headless'
+        //     ]
+        //     }
+        // }               
     ],
     //
     // ===================
@@ -135,7 +136,7 @@ exports.config = {
     framework: 'mocha',
 
     //The number of times to retry the entire specfile when it fails as a whole
-    specFileRetries: 1,
+    //specFileRetries: 1,
 
     // Delay in seconds between the spec file retry attempts
     specFileRetriesDelay: 0,
@@ -175,7 +176,8 @@ exports.config = {
         global.expect = chai.expect;
         should = chai.should();
         assert = chai.assert;
-      },
+    },
+
 
     /**
      * Gets executed before a worker process is spawned and can be used to initialize specific service

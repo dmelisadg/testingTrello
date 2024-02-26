@@ -1,7 +1,7 @@
 const page = require('./page')
 
 class LoginPage {
-
+    // setCredentials
     get enterEmail() { return $('input#user.form-field') }
 
     get enterPassword() { return $('input#password') }
@@ -15,12 +15,14 @@ class LoginPage {
     get titleWelcomePage() { return $("div[data-testid='header-member-menu-avatar']") }
 
     get errorBox() { return $("div[data-testid='form-error--content']") }
-
+ 
+ 
+    // Slack
     get slackButton() { return $('a#slackButton.slack-button.oauth-button') }
 
     get continueSlackButton() { return $('button[data-qa="submit_team_domain_button"]') }
 
-    get continueSlackWorkSpaceButton() { return $('button[data-qa="submit_team_domain_button"]') }
+    //get continueSlackWorkSpaceButton() { return $('button[data-qa="submit_team_domain_button"]') }
 
     get slackInputWorkSpace() { return $('input[data-qa="signin_domain_input"]') }
 
