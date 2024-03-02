@@ -1,11 +1,11 @@
 class GetElement{
 
-    oneDolarSign(selector){
-        return $(selector)   
+    async oneDolarSign(selector){
+        return await $(selector)   
     }
 
-    doubleDolarSign(selector){
-        return $$(selector)   
+    async doubleDolarSign(selector){
+        return await $$(selector)   
     }
 
 

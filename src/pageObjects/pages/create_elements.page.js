@@ -2,18 +2,10 @@ const components = require('../components/index')
 
 class CreateElements {
 
-    // create newlist spec
-   // get boardList() {return $$('ol#board li')}// board component
+    //get addCardButton() {return $('button[data-testid="list-card-composer-add-card-button"]')}// board component
 
+    //get addNameCard() {return $('textarea.qJv26NWQGVKzI9')}// board component
 
-    // new card 
-    get addCardButton() {return $$('button[data-testid="list-add-card-button"]')}// board component
-
-    get addCardButton() {return $('button[data-testid="list-card-composer-add-card-button"]')}// board component
-
-    get addNameCard() {return $('textarea.qJv26NWQGVKzI9')}// board component
-
-    get cardPosition() {return $$('li.bi0h3HALKXjfDq')[0].$$('a.NdQKKfeqJDDdX3')}// board component
     
     // HELPERS
     randomName(){
@@ -21,15 +13,8 @@ class CreateElements {
         return newName
     }
 
-    // llamar selectores desde index
-    async childrenArray(typeOfElement,position){
-        const arrayLength = await components.childrenArray(typeOfElement,position)
-        return arrayLength
-        // let listLength = await components.cardList.length
-        // let lastChildList = await components.cardList[listLength-1].$('h2')
-        // let textList = await lastChildList.getText()
-        // return textList
-    }
+   
+    // METHODS
 
     async openBoard(position){
         await components.openBoard(position)
@@ -42,9 +27,38 @@ class CreateElements {
     async warningBoardName(){
         return await components.warningBoardName()
      }
+
+    async childElement(element, position){
+        return await components.childElement(element,position)
+    }
+
+    async elementLength(element){
+        return await components.elementLength(element)
+    }
+
+    async lastChildElement(element){
+        const length = await this.elementLength(element)
+        const lastChildPosition = length-1
+        const lastChildElement = this.childElement(element, lastChildPosition)
+        return await lastChildElement
+    }
+
+    async lastCardInAList(list){
+        return await components.lastCardInAList(list)
+    }
     
-    async addNewlist(listname){
-        await components.addNewlist(listname)
+    async addNewlist(board){
+        await this.openBoard(board)
+        const listName = this.randomName()
+        await components.addNewlist(listName)
+        return listName
+    }
+
+    async addNewCardToBoard(board,list){
+        await this.openBoard(board)
+        const cardName = this.randomName()
+        await components.addNewCard(cardName,list)
+        return await cardName
     }
 
     async createBoard(boardName){
@@ -57,7 +71,7 @@ class CreateElements {
     }
 
     async deleteBoard() {
-        await components.deleteBoard()   
+        return await components.deleteBoard()   
     }
 
 }
