@@ -4,7 +4,7 @@ const loginPage = require('../pageObjects/pages/login.page')
 describe('Creating elements in My new Trello account', () => {
     beforeEach(async () => {
         await loginPage.openTrello()
-        await loginPage.setCredentials("testmelisadominguez@gmail.com", "TestMelisa-02142024.")
+        await loginPage.loginToTrello(loginPage.credentials().username, loginPage.credentials().password)
     })
     it('Create a new board', async function () {
         this.retries(1)
@@ -26,7 +26,7 @@ describe('Creating elements in My new Trello account', () => {
         expect(textList).to.equal(listNewName)
     })// LISTA
     it('Create a new card on the first list', async () => {
-        const cardNewName = await createElements.addNewCardToBoard(0,0)
+        const cardNewName = await createElements.addNewCardToBoard(0, 0)
         const lastcardName = await createElements.lastCardInAList(0)
         expect(lastcardName).to.equal(cardNewName)
     })// LISTA

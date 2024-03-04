@@ -1,11 +1,6 @@
 const components = require('../components/index')
 
 class CreateElements {
-
-    //get addCardButton() {return $('button[data-testid="list-card-composer-add-card-button"]')}// board component
-
-    //get addNameCard() {return $('textarea.qJv26NWQGVKzI9')}// board component
-
     
     // HELPERS
     randomName(){
@@ -13,9 +8,7 @@ class CreateElements {
         return newName
     }
 
-   
     // METHODS
-
     async openBoard(position){
         await components.openBoard(position)
     }

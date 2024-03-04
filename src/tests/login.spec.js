@@ -7,15 +7,13 @@ describe('Trello Sing-in page', () => {
         await loginPage.openTrello()
     })
     it('Sign in as a registered user', async () => {
-        await loginPage.setCredentials('testmelisadominguez@gmail.com', 'TestMelisa-02142024.')
-        const titleWelcome = await loginPage.titleWelcomePage.getAttribute('title')
-        titleWelcome.should.equal('Test MelisaDG (testmelisadg)')
+        const titleWelcome = await loginPage.loginToTrello(loginPage.credentials().username,loginPage.credentials().password)
+        expect(titleWelcome).to.equal((await loginPage.titleMessages()).successLogin)
     })
 
-    it.skip('Sign in as non-registered user', async () => {
-        await loginPage.setCredentials('mymail@gmail.com', '9876543***$%')
-        const errorMessage = await loginPage.errorBox.getText()
-        assert.equal(errorMessage,'Incorrect email address and / or password. If you recently migrated your Trello account to an Atlassian account, you will need to use your Atlassian account password. Alternatively, you can get help logging in.')
+    it('Sign in as non-registered user', async () => {
+        const errorMessage =await loginPage.loginToTrello(loginPage.randomCredentials().username,loginPage.randomCredentials().password)
+        expect(errorMessage).to.equal((await loginPage.titleMessages()).failedLogin)
     })
 })
 
@@ -25,14 +23,13 @@ describe('Trello Sing-in page with Slack account', () => {
         await loginPage.loginWithSlack('testing-training-talk')
     })
     it('Enable the Sign in registered user with Slack account page', async () => {
-        const gmailButton = await loginPage.signInGmailButton.getText()
+        const gmailButton = await loginPage.signInGmailButton()
         expect(gmailButton).to.equal('Sign In With Google')
     })
 
     it('Sign in with Slack account and gmail account registered user', async () => {
-        await loginPage.loginSlackFromGmail('testmelisadominguez@gmail.com', 'TestMelisa-02142024.')
-        const titleWelcome = await loginPage.titleWelcomePage.getAttribute('title')
-        expect(titleWelcome).to.equal('Test MelisaDG (testmelisadg)')
+       const titleWelcome= await loginPage.loginSlackFromGmail(loginPage.credentials().username,loginPage.credentials().password)
+        expect(titleWelcome).to.equal((await loginPage.titleMessages()).successLogin)
     })
 
 })

@@ -1,28 +1,12 @@
+const components = require('../components/index')
 const page = require('./page')
 
 class LoginPage {
-    // setCredentials
-    get enterEmail() { return $('input#user.form-field') }
 
-    get enterPassword() { return $('input#password') }
-
-    get continueButton() { return $('input#login.button') }
-
-    get loginButton() { return $('button#login-submit') }
-
-    get navBarWelcomePage() { return $('nav#header') }
-
-    get titleWelcomePage() { return $("div[data-testid='header-member-menu-avatar']") }
-
-    get errorBox() { return $("div[data-testid='form-error--content']") }
- 
- 
     // Slack
     get slackButton() { return $('a#slackButton.slack-button.oauth-button') }
 
     get continueSlackButton() { return $('button[data-qa="submit_team_domain_button"]') }
-
-    //get continueSlackWorkSpaceButton() { return $('button[data-qa="submit_team_domain_button"]') }
 
     get slackInputWorkSpace() { return $('input[data-qa="signin_domain_input"]') }
 
@@ -46,44 +30,62 @@ class LoginPage {
 
     get nextSlackButton() { return $$('span.VfPpkd-vQzf8d')[1] }
 
-
     get acceptContinueSlackButton() { return $('.p-oauth_footer button.c-button.c-button--primary.c-button--medium.p-oauth_footer__accept_btn') }
 
     get cookiesButton() { return $('#onetrust-accept-btn-handler') }
 
+    //HELPERS
+    randomCredentials(){
+        const credentials = {
+            username:Math.floor(Math.random()*1000)+'***$%'+'@gmail.com',
+            password:Math.floor(Math.random()*1000)+'***$%'
+        }
+        return credentials
+    }
+
+    credentials(){
+        const credentials = {
+            username:'testmelisadominguez@gmail.com',
+            password:'TestMelisa-02142024.'
+        }
+        return credentials
+    }
+    titleText(){
+        const title = {
+            boardTitle:'Test MelisaDG (testmelisadg)',
+            errorMessage:'Incorrect email address and / or password. If you recently migrated your Trello account to an Atlassian account, you will need to use your Atlassian account password. Alternatively, you can get help logging in.'
+        }
+        return title
+    }
+
+    //METHODS
     openTrello() {
         return page.openLogin()
     }
 
-    async setCredentials(username, password) {
-        await this.enterEmail.waitForDisplayed();
-        await this.enterEmail.setValue(username);
-        await this.continueButton.waitForClickable({ timeout: 20000 });
-        await this.continueButton.click();
-        await this.enterPassword.waitForDisplayed();
-        await this.enterPassword.setValue(password);
-        await this.loginButton.waitForClickable({ timeout: 20000 });
-        await this.loginButton.click();
+    async loginToTrello(username, password) {
+        await components.setCredentials(username, password)
+        return await components.titles()
+    }
+
+    async titleMessages(){
+        const message = {
+            successLogin : this.titleText().boardTitle,
+            failedLogin: this.titleText().errorMessage
+        }
+        return message
     }
 
     async loginWithSlack(workspace) {
-        await this.slackButton.click();
-        await this.slackInputWorkSpace.waitForDisplayed();
-        await this.slackInputWorkSpace.setValue(workspace);
-        await this.continueSlackButton.click();
+        await components.enableSlackLogin(workspace)
+    }
+    async signInGmailButton(){
+        return await components.googleLoginLabel()
     }
 
     async loginSlackFromGmail(username, password) {
-        await this.cookiesButton.waitForClickable({ timeout: 20000 });
-        await this.cookiesButton.click()
-        await this.passwordSlackButton.waitForClickable({ timeout: 20000 });
-        await this.passwordSlackButton.click()
-        await this.emailField.setValue(username);
-        await this.passwordField.setValue(password);
-        await this.buttonSignIn.waitForClickable({ timeout: 20000 });
-        await this.buttonSignIn.click()
-        await this.acceptContinueSlackButton.waitForClickable({ timeout: 20000 });
-        await this.acceptContinueSlackButton.click();
+        await components.loginFromGmail(username, password)
+        return await components.titles()
     }
 
 }

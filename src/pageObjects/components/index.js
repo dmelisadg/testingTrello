@@ -6,6 +6,8 @@ const Header = require('./commons/header.component')
 const LogOut = require('./profile/logout.component')
 const LogOutAtlassian = require('./profile/logoutAtlassian.component')
 const WorkSpace = require('./workspace/workspace.component')
+const Login = require('./login/login.component')
+const LoginSlack = require('./login/loginSlack.component')
 
 
 class Components {
@@ -14,6 +16,7 @@ class Components {
         this.initCommons();
         this.initLogOut();
         this.initWorkspace();
+        this.initLogin();
     }
 
     initBoard() {
@@ -34,6 +37,51 @@ class Components {
 
     initWorkspace() {
         this.workspace = new WorkSpace();
+    }
+
+    initLogin() {
+        this.login = new Login();
+        this.loginSlack = new LoginSlack();
+    }
+    async setCredentials(username, password) {
+        await $(this.login.inputEmail).waitForDisplayed()
+        await $(this.login.inputEmail).setValue(username)
+        await $(this.login.continue).click()
+        await $(this.login.inputPassword).waitForDisplayed()
+        await $(this.login.inputPassword).setValue(password)
+        await $(this.login.loginButton).click()
+    }
+
+    async titles() {
+        await browser.waitUntil(async () => {
+            const isTitle = await $(this.login.errorBox).isExisting();
+            return isTitle || await $(this.login.titleWelcomePage).isExisting();
+        }, {
+            timeout: 5000,
+            timeoutMsg: 'There is no any selector after 1 second'
+        });
+        const isTitle = await $(this.login.errorBox).isExisting();
+        return isTitle ? await $(this.login.errorBox).getText() : await $(this.login.titleWelcomePage).getAttribute('title');
+    }
+
+    async enableSlackLogin(workspace){
+        await $(this.loginSlack.slackButton).click();
+        await $(this.loginSlack.slackInputWorkSpace).waitForDisplayed();
+        await $(this.loginSlack.slackInputWorkSpace).setValue(workspace);
+        await $(this.loginSlack.continueSlackButton).click();
+    }
+
+    async googleLoginLabel(){
+        return await $(this.loginSlack.googleLoginLabel).getText()
+    }
+
+    async loginFromGmail(username, password){
+        await $(this.loginSlack.acceptCookies).click()
+        await $(this.loginSlack.passwordSlack).click()
+        await $(this.loginSlack.inputEmail).setValue(username);
+        await $(this.loginSlack.inputPassword).setValue(password);
+        await $(this.loginSlack.singIn).click()
+        await $(this.loginSlack.acceptContinueSlack).click();
     }
 
     async openBoard(position) {
@@ -75,7 +123,7 @@ class Components {
         await $(this.boardMenu.closeConfirmation).click()
     }
 
-    async closeBoardName(){
+    async closeBoardName() {
         return await $(this.boardClose.closedBoardTitle).getText()
     }
 
@@ -103,12 +151,12 @@ class Components {
         return (element === 'card') ? await elementArray.$$(this.board.a) : await elementArray.$$(this.board.h2)
     }
 
-    async elementLength(element){
+    async elementLength(element) {
         const array = await this.childrenArray(element)
         return await array.length
     }
 
-    async childElement(element, position){
+    async childElement(element, position) {
         const array = await this.childrenArray(element)
         return await array[position]
     }
@@ -119,7 +167,7 @@ class Components {
         await $(this.board.addListButton).click()
     }
 
-    async addNewCard(cardname,list) {
+    async addNewCard(cardname, list) {
         const elementArray = await $(this.board.elementArray)
         const addButtons = await elementArray.$$(this.board.addACard)[list]
         await addButtons.click()
@@ -127,12 +175,12 @@ class Components {
         await $(this.board.addCardButton).click()
     }
 
-    async lastCardInAList(list){
+    async lastCardInAList(list) {
         const elementArray = await $(this.board.elementArray)
         const listsInBoard = await elementArray.$$(this.board.listsOfLists)[list]
         const cardsInList = await listsInBoard.$$(this.board.li)
         const lengthCardsInList = await cardsInList.length
-        return await cardsInList[lengthCardsInList-1].getText()
+        return await cardsInList[lengthCardsInList - 1].getText()
     }
 
 
