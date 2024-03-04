@@ -12,7 +12,7 @@ describe('Creating elements in My new Trello account', () => {
         await createElements.createBoard(boardName)
         const boardNameText = await createElements.boardName()
         expect(boardNameText).to.equal(boardName)
-    }) // LISTA
+    }) 
     it('Error message - create a new board', async function () {
         this.retries(1)
         await createElements.createBoard(' ')
@@ -24,18 +24,18 @@ describe('Creating elements in My new Trello account', () => {
         const lastChildElement = await createElements.lastChildElement('list')
         const textList = await lastChildElement.getText()
         expect(textList).to.equal(listNewName)
-    })// LISTA
+    })
     it('Create a new card on the first list', async () => {
         const cardNewName = await createElements.addNewCardToBoard(0, 0)
         const lastcardName = await createElements.lastCardInAList(0)
         expect(lastcardName).to.equal(cardNewName)
-    })// LISTA
+    })
     it('Delete first board', async () => {
         const boardAfterClose = await createElements.deleteBoard()
         expect(boardAfterClose).to.include(' is closed.')
-    })// LISTA
+    })
 
     afterEach(async () => {
         await createElements.endSession()
-    })// LISTA
+    })
 })

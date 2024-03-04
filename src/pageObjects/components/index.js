@@ -76,7 +76,12 @@ class Components {
     }
 
     async loginFromGmail(username, password){
-        await $(this.loginSlack.acceptCookies).click()
+        const cookies = await $(this.loginSlack.acceptCookies)
+        const isCookies = await cookies.isExisting()
+        if (isCookies===true) {
+            await cookies.click()
+        }
+        // await $(this.loginSlack.acceptCookies).click()
         await $(this.loginSlack.passwordSlack).click()
         await $(this.loginSlack.inputEmail).setValue(username);
         await $(this.loginSlack.inputPassword).setValue(password);

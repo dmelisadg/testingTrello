@@ -27,7 +27,8 @@ describe('Trello Sing-in page with Slack account', () => {
         expect(gmailButton).to.equal('Sign In With Google')
     })
 
-    it('Sign in with Slack account and gmail account registered user', async () => {
+    it('Sign in with Slack account and gmail account registered user', async function () {
+       this.retries(1)
        const titleWelcome= await loginPage.loginSlackFromGmail(loginPage.credentials().username,loginPage.credentials().password)
         expect(titleWelcome).to.equal((await loginPage.titleMessages()).successLogin)
     })
