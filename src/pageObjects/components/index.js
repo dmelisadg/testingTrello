@@ -43,12 +43,25 @@ class Components {
         this.login = new Login();
         this.loginSlack = new LoginSlack();
     }
+    //HELPERS
+    async waitDisplayedAndClick(selector){
+        await $(selector).waitForDisplayed({timeout:10000})
+        await $(selector).click()
+    }
+    async waitAndSetValue(selector, value){
+        await $(selector).waitForDisplayed({timeout:10000})
+        await $(selector).setValue(value)
+    }
+    async waitClickableAndClick(selector){
+        await $(selector).waitForClickable({timeout:10000})
+        await $(selector).click()
+    }
+
+    //METHODS
     async setCredentials(username, password) {
-        await $(this.login.inputEmail).waitForDisplayed()
-        await $(this.login.inputEmail).setValue(username)
+        await this.waitAndSetValue(this.login.inputEmail,username )
         await $(this.login.continue).click()
-        await $(this.login.inputPassword).waitForDisplayed()
-        await $(this.login.inputPassword).setValue(password)
+        await this.waitAndSetValue(this.login.inputPassword,password)
         await $(this.login.loginButton).click()
     }
 
@@ -57,8 +70,8 @@ class Components {
             const isTitle = await $(this.login.errorBox).isExisting();
             return isTitle || await $(this.login.titleWelcomePage).isExisting();
         }, {
-            timeout: 5000,
-            timeoutMsg: 'There is no any selector after 1 second'
+            timeout: 10000,
+            timeoutMsg: 'There is no any selector after 10 seconds'
         });
         const isTitle = await $(this.login.errorBox).isExisting();
         return isTitle ? await $(this.login.errorBox).getText() : await $(this.login.titleWelcomePage).getAttribute('title');
@@ -66,8 +79,7 @@ class Components {
 
     async enableSlackLogin(workspace){
         await $(this.loginSlack.slackButton).click();
-        await $(this.loginSlack.slackInputWorkSpace).waitForDisplayed();
-        await $(this.loginSlack.slackInputWorkSpace).setValue(workspace);
+        await this.waitAndSetValue(this.loginSlack.slackInputWorkSpace,workspace)
         await $(this.loginSlack.continueSlackButton).click();
     }
 
@@ -81,7 +93,6 @@ class Components {
         if (isCookies===true) {
             await cookies.click()
         }
-        // await $(this.loginSlack.acceptCookies).click()
         await $(this.loginSlack.passwordSlack).click()
         await $(this.loginSlack.inputEmail).setValue(username);
         await $(this.loginSlack.inputPassword).setValue(password);
@@ -94,24 +105,16 @@ class Components {
     }
 
     async boardName() {
-        await $(this.board.boardName).waitForDisplayed()
-        const board = await $(this.board.boardName).getText();
-        return board
-    }
-
-    async warningBoardName() {
-        await $(this.boardCreation.warningName).waitForDisplayed()
-        const warning = await $(this.boardCreation.warningName).getText();
-        return warning
+        const boardCreationSuccess = await $(this.board.boardName)
+        const boardCreationFailed = await $(this.boardCreation.warningName)
+        const isBoardCreationFailed = await boardCreationFailed.isExisting()
+        return (isBoardCreationFailed===true)? await boardCreationFailed.getText():await boardCreationSuccess.getText();
     }
 
     async createBoard(boardName) {
-        await $(this.workspace.newBoard).waitForDisplayed()
-        await $(this.workspace.newBoard).click()
-        await $(this.boardCreation.inputBoardName).waitForDisplayed()
-        await $(this.boardCreation.inputBoardName).setValue(boardName)
-        await $(this.boardCreation.createBoardSubmit).waitForDisplayed()
-        await $(this.boardCreation.createBoardSubmit).click()
+        await this.waitDisplayedAndClick(this.workspace.newBoard)
+        await this.waitAndSetValue(this.boardCreation.inputBoardName,boardName)
+        await this.waitDisplayedAndClick(this.boardCreation.createBoardSubmit)
     }
 
     async menuIsDisplayed() {
@@ -122,10 +125,8 @@ class Components {
     }
 
     async closeBoard() {
-        await $(this.boardMenu.closeSubmit).waitForClickable({ timeout: 10000 })
-        await $(this.boardMenu.closeSubmit).click()
-        await $(this.boardMenu.closeConfirmation).waitForClickable({ timeout: 10000 })
-        await $(this.boardMenu.closeConfirmation).click()
+        await this.waitClickableAndClick(this.boardMenu.closeSubmit)
+        await this.waitClickableAndClick(this.boardMenu.closeConfirmation)
     }
 
     async closeBoardName() {
@@ -140,15 +141,13 @@ class Components {
     }
 
     async openProfile() {
-        await $(this.header.profile).waitForClickable({ timeout: 10000 })
-        await $(this.header.profile).click()
+        await this.waitClickableAndClick(this.header.profile)
     }
 
     async logOutSession() {
         await $(this.logOut.displayMenu).waitForDisplayed()
         await $(this.logOut.logOutButton).click()
-        await $(this.logOutAtlassian.logOut).waitForClickable({ timeout: 10000 })
-        await $(this.logOutAtlassian.logOut).click()
+        await this.waitClickableAndClick(this.logOutAtlassian.logOut)
     }
 
     async childrenArray(element) {

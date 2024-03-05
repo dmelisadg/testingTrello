@@ -16,7 +16,7 @@ describe('Creating elements in My new Trello account', () => {
     it('Error message - create a new board', async function () {
         this.retries(1)
         await createElements.createBoard(' ')
-        const warningBoardNameText = await createElements.warningBoardName()
+        const warningBoardNameText = await createElements.boardName()
         expect(warningBoardNameText).to.equal('Board title is required')
     }) // LISTA
     it('Create a new list on a board', async () => {

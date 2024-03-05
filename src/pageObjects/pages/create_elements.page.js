@@ -17,10 +17,6 @@ class CreateElements {
        return await components.boardName()
     }
 
-    async warningBoardName(){
-        return await components.warningBoardName()
-     }
-
     async childElement(element, position){
         return await components.childElement(element,position)
     }

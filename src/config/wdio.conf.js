@@ -28,7 +28,7 @@ exports.config = {
     // Patterns to exclude.
     exclude: [
         // './../tests/create_elements.spec.js',
-        // './../tests/login.spec.js'
+         './../tests/login.spec.js'
     ],
     //
     // ============
@@ -57,18 +57,18 @@ exports.config = {
             browserName: 'chrome',
             'goog:chromeOptions': {
                 args: ['--start-maximized', '--incognito'
-                    , '--headless'
+                    // , '--headless'
                 ]
             }
         }
-        ,
-        {
-            browserName: 'firefox',
-            'moz:firefoxOptions': {
-                args: ['--start-maximized', '--private-window','--headless'
-                ]
-            }
-        }
+        // ,
+        // {
+        //     browserName: 'firefox',
+        //     'moz:firefoxOptions': {
+        //         args: ['--start-maximized', '--private-window','--headless'
+        //         ]
+        //     }
+        // }
         // ,
         // {
         //     browserName: 'msedge',
@@ -136,7 +136,7 @@ exports.config = {
     framework: 'mocha',
 
     //The number of times to retry the entire specfile when it fails as a whole
-    specFileRetries: 1,
+    //specFileRetries: 1,
 
     // Delay in seconds between the spec file retry attempts
     specFileRetriesDelay: 0,
