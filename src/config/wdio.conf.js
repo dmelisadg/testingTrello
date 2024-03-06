@@ -28,7 +28,7 @@ exports.config = {
     // Patterns to exclude.
     exclude: [
         // './../tests/create_elements.spec.js',
-         './../tests/login.spec.js'
+         //'./../tests/login.spec.js'
     ],
     //
     // ============
