@@ -69,14 +69,14 @@ exports.config = {
                 ]
             }
         }
-        ,
-        {
-            browserName: 'msedge',
-            'ms:edgeOptions': {
-               args: ['--start-maximized', '--inprivate', '--headless'
-            ]
-            }
-        }               
+        // ,
+        // {
+        //     browserName: 'msedge',
+        //     'ms:edgeOptions': {
+        //        args: ['--start-maximized', '--inprivate', '--headless'
+        //     ]
+        //     }
+        // }               
     ],
     //
     // ===================
