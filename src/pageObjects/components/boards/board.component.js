@@ -9,7 +9,7 @@ class Board {
         this.a = '.bPNGI_VbtbXQ8v'
         this.listsOfLists = 'li.bi0h3HALKXjfDq'// multiple
         this.cardsList = 'a.NdQKKfeqJDDdX3'
-        this.li = 'li'
+        this.li = 'li.T9JQSaXUsHTEzk'
         this.addAList = 'button[data-testid="list-composer-button"]';
         this.inputListName = 'textarea.oe8RymzptORQ7h'
         this.addListButton = 'button[data-testid="list-composer-add-list-button"]';
