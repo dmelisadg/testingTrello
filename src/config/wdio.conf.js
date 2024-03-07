@@ -1,3 +1,4 @@
+const { ReportAggregator, HtmlReporter } = import('wdio-html-nice-reporter');
 exports.config = {
 
     //
@@ -28,7 +29,7 @@ exports.config = {
     // Patterns to exclude.
     exclude: [
         // './../tests/create_elements.spec.js',
-         //'./../tests/login.spec.js'
+        //'./../tests/login.spec.js'
     ],
     //
     // ============
@@ -65,7 +66,7 @@ exports.config = {
         {
             browserName: 'firefox',
             'moz:firefoxOptions': {
-                args: ['--start-maximized', '--private-window','--headless'
+                args: ['--start-maximized', '--private-window', '--headless'
                 ]
             }
         }
@@ -147,7 +148,17 @@ exports.config = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
-    reporters: ['spec'],
+    reporters: ['spec',
+        ["html-nice", {
+            outputDir: './reports/html-reports/',
+            filename: 'report.html',
+            reportTitle: 'Test Report Trello functionalities',
+            linkScreenshots: true,
+            showInBrowser: true,
+            collapseTests: false,
+            useOnAfterCommandForScreenshot: false
+        }
+        ]],
 
     // Options to be passed to Mocha.
     // See the full list at http://mochajs.org/
@@ -169,8 +180,24 @@ exports.config = {
      * @param {object} config wdio configuration object
      * @param {Array.<Object>} capabilities list of capabilities details
      */
-    // onPrepare: function (config, capabilities) {
-    // },
+    onPrepare: function(config, capabilities) {
+        reportAggregator = new ReportGenerator({
+            outputDir: './reports/html-reports/',
+            filename: 'master-report.html',
+            reportTitle: 'Master Report',
+            browserName: capabilities.browserName,
+            collapseTests: true
+        });
+        reportAggregator.clean();
+    },
+    
+    
+    onComplete: function (exitCode, config, capabilities, results) {
+        (async () => {
+            await reportAggregator.createReport();
+        })();
+    },
+
     before: async () => {
         const chai = await import('chai');
         global.expect = chai.expect;
