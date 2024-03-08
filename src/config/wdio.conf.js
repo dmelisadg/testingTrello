@@ -1,4 +1,5 @@
-const { ReportAggregator, HtmlReporter } = import('wdio-html-nice-reporter');
+//const { ReportAggregator, HtmlReporter } = import('wdio-html-nice-reporter');
+let reportAggregator;
 exports.config = {
 
     //
@@ -54,22 +55,21 @@ exports.config = {
     // https://saucelabs.com/platform/platform-configurator
     //
     capabilities: [
-        // {
-        //     browserName: 'chrome',
-        //     'goog:chromeOptions': {
-        //         args: ['--start-maximized', '--incognito'
-        //             // , '--headless'
-        //         ]
-        //     }
-        // }
-        // ,
         {
-            browserName: 'firefox',
-            'moz:firefoxOptions': {
-                args: ['--start-maximized', '--private-window', '--headless'
+            browserName: 'chrome',
+            'goog:chromeOptions': {
+                args: ['--start-maximized', '--incognito'//, '--headless'
                 ]
             }
         }
+        // ,
+        // {
+        //     browserName: 'firefox',
+        //     'moz:firefoxOptions': {
+        //         args: ['--start-maximized', '--private-window', '--headless'
+        //         ]
+        //     }
+        // }
         // ,
         // {
         //     browserName: 'msedge',
@@ -148,17 +148,14 @@ exports.config = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
-    reporters: ['spec',
-        ["html-nice", {
-            outputDir: './reports/html-reports/',
-            filename: 'report.html',
-            reportTitle: 'Test Report Trello functionalities',
-            linkScreenshots: true,
-            showInBrowser: true,
-            collapseTests: false,
-            useOnAfterCommandForScreenshot: false
-        }
-        ]],
+    reporters: [
+                ['spec', {
+                            addConsoleLogs: false,
+                            realtimeReporting: false,
+                            showPreface: false,
+                        }],
+                        ['html-nice', {}]
+            ],
 
     // Options to be passed to Mocha.
     // See the full list at http://mochajs.org/
@@ -180,18 +177,20 @@ exports.config = {
      * @param {object} config wdio configuration object
      * @param {Array.<Object>} capabilities list of capabilities details
      */
-    onPrepare: function(config, capabilities) {
-        reportAggregator = new ReportGenerator({
-            outputDir: './reports/html-reports/',
-            filename: 'master-report.html',
-            reportTitle: 'Master Report',
-            browserName: capabilities.browserName,
-            collapseTests: true
-        });
+    onPrepare: async function (config, capabilities) {
+        reportAggregator = await import('wdio-html-nice-reporter')
+
+        reportAggregator = new reportAggregator.ReportAggregator(
+            {
+                outputDir: './reports/',
+                filename: 'Trello-report.html',
+                reportTitle: 'Trello UI functionalities - Test Report',
+                browserName: process.env.TEST_BROWSER ? process.env.TEST_BROWSER : 'unspecified',
+                showInBrowser: true
+            });
+
         reportAggregator.clean();
     },
-    
-    
     onComplete: function (exitCode, config, capabilities, results) {
         (async () => {
             await reportAggregator.createReport();
