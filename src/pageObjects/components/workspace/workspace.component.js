@@ -1,15 +1,11 @@
 class WorkSpace {
-    constructor() {
+  constructor () {
+    this.boardSection = 'ul.boards-page-board-section-list';
 
-        this.boardSection = 'ul.boards-page-board-section-list'; 
-        
-        this.boardList = 'li.boards-page-board-section-list-item';
+    this.boardList = 'li.boards-page-board-section-list-item';
 
-        this.newBoard = 'div.board-tile.mod-add';
-    }
-
+    this.newBoard = 'div.board-tile.mod-add';
+  }
 }
-
-
 
 module.exports = WorkSpace;
