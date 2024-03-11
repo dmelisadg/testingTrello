@@ -1,14 +1,15 @@
-class GetElement{
+const helpers = () => {
+	async function oneSign(selector) {
+		return await $(selector);
+	}
 
-    async oneDolarSign(selector){
-        return await $(selector)   
-    }
+	async function doubleSign(selector) {
+		return await $$(selector);
+	}
+	return {
+		oneSign,
+		doubleSign
+	};
+};
 
-    async doubleDolarSign(selector){
-        return await $$(selector)   
-    }
-
-
-}
-
-module.exports = new GetElement;
+module.exports = { helpers };
