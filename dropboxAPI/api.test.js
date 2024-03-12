@@ -2,7 +2,7 @@
 const axios = require('axios');
 const chai = import('chai');
 const token =
-	'sl.Bw9KbdQDS3LNtZSlEVpjW3bJRrJ3pBTUNWXlGDo01EsrWh6JIYahtheyjg9aoxEg5RX-sxVP_KYtv5AethrUvuwZxIWQv3Ue-swkBiYxP4RKsKlQ-So2COz0jVgPWLAKv9omhe602gjykW4EXPPrxx4';
+	'sl.BxSoQVydTOiLR7KR4gkNfh1T-dx9TVqnDEL3DJ070gyPLsPxz24PbcYPC1560zd6rAGlkBaXqQGheg22EsvbVSqqte4TPE-mag0Uk1C_HSymBOngXsLZiKJoBedbriLInd_v6FV0xPjmqql1qBYqhII';
 describe('DropboxAPI', async () => {
 	it('Upload a file to the API dropbox account', async () => {
 		const fileContent =
