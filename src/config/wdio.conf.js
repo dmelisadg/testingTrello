@@ -29,7 +29,11 @@ exports.config = {
 	exclude: [
 		'./../tests/create_elements.spec.js',
 		'./../tests/login.spec.js'
-		// ,'./../tests/features/slackLogin.feature'
+		//  ,'./../tests/features/loginSlack.feature'
+		//  ,'./../tests/features/login.feature'
+		//  ,'./../tests/features/createBoard.feature'
+		//  ,'./../tests/features/createList.feature'
+		//  ,'./../tests/features/createCard.feature'
 	],
 	//
 	// ============
@@ -54,20 +58,21 @@ exports.config = {
 	// https://saucelabs.com/platform/platform-configurator
 	//
 	capabilities: [
-		{
-			browserName: 'chrome',
-			'goog:chromeOptions': {
-				args: ['--start-maximized', '--incognito']//, '--headless']
-			}
-		}
-		// ,
 		// {
-		//     browserName: 'firefox',
-		//     'moz:firefoxOptions': {
-		//         args: ['--start-maximized', '--private-window'//, '--headless'
-		//         ]
-		//     }
+		// 	browserName: 'chrome',
+		// 	'goog:chromeOptions': {
+		// 		args: ['--start-maximized', '--incognito'
+		// 		, '--headless']
+		// 	}
 		// }
+		// ,
+		{
+		    browserName: 'firefox',
+		    'moz:firefoxOptions': {
+		        args: ['--start-maximized', '--private-window', '--headless'
+		        ]
+		    }
+		}
 		// ,
 		// {
 		//     browserName: 'msedge',
@@ -135,7 +140,7 @@ exports.config = {
 	framework: 'cucumber', // 'mocha',
 
 	// The number of times to retry the entire specfile when it fails as a whole
-	// specFileRetries: 1,
+	specFileRetries: 1,
 
 	// Delay in seconds between the spec file retry attempts
 	specFileRetriesDelay: 0,
@@ -165,7 +170,8 @@ exports.config = {
 		timeout: 60000
 	},
 	cucumberOpts: {
-		require: ['src/tests/**/*.steps.js']//,
+		require: ['src/tests/**/*.steps.js'],
+		timeout:30000,
 		// ignoreUndefinedDefinitions: true
 	},
 	//

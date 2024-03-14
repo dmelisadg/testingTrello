@@ -1,5 +1,5 @@
-const createElements = require('../pageObjects/pages/create_elements.page');
-const loginPage = require('../pageObjects/pages/login.page');
+const createElements = require('./../../pageObjects/pages/create_elements.page');
+const loginPage = require('./../../pageObjects/pages/login.page');
 
 describe('Creating elements in My new Trello account', () => {
 	beforeEach(async () => {
@@ -21,9 +21,9 @@ describe('Creating elements in My new Trello account', () => {
 		await createElements.createBoard(' ');
 		const warningBoardNameText = await createElements.boardName();
 		expect(warningBoardNameText).to.equal('Board title is required');
-	}); // LISTA
+	}); 
 	it('Create a new list on a board', async () => {
-		const listNewName = await createElements.addNewlist(0);
+		const listNewName = await createElements.addNewList(0);
 		const lastChildElement = await createElements.lastChildElement('list');
 		const textList = await lastChildElement.getText();
 		expect(textList).to.equal(listNewName);

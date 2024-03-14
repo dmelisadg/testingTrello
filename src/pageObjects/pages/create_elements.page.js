@@ -35,10 +35,10 @@ class CreateElements {
 		return await components.lastCardInAList(list);
 	}
 
-	async addNewlist(board) {
+	async addNewList(board) {
 		await this.openBoard(board);
 		const listName = this.randomName();
-		await components.addNewlist(listName);
+		await components.addNewList(listName);
 		return listName;
 	}
 

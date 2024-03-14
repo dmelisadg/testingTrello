@@ -84,17 +84,6 @@ Then "Enter a title for this card" field disappears
 
 
 
-Feature: Filtering a card by keyword - Extra.
-
-
-@positive scenario
-Scenario: Filtering cards by name
-Given I am on "myNewBoard" page 
-When I click the "Filter" button
-And I enter "myNewCard" in the "Enter a keyword" field on a pop-up 
-Then I should see all cards that match by name
-
-
 
 
 

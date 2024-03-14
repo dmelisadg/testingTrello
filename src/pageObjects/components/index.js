@@ -177,7 +177,7 @@ class Components {
 		return await array[position];
 	}
 
-	async addNewlist(listname) {
+	async addNewList(listname) {
 		await $(this.board.addAList).click();
 		await $(this.board.inputListName).setValue(listname);
 		await $(this.board.addListButton).click();
