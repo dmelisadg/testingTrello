@@ -7,7 +7,7 @@ When I enter "mymail@somedomain.com" in the "Enter your email" field
 * I click the "Continue" button
 * I enter "123456789" in the "Enter password" field
 * I click the "Log in" button
-Then I should see my welcome page
+Then I should see "Test MelisaDG (testmelisadg)" in the title board
 
 @negative scenario
 Scenario: Sign in as a non-registered user

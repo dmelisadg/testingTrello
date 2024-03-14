@@ -23,11 +23,13 @@ exports.config = {
 	// The path of the spec files will be resolved relative from the directory of
 	// of the config file unless it's absolute.
 	//
-	specs: ['./../tests/**/*.js'],
+	specs: [// './../tests/**/*.js'
+	'./../tests/features/*.feature'],
 	// Patterns to exclude.
 	exclude: [
-		// './../tests/create_elements.spec.js',
-		// './../tests/login.spec.js'
+		'./../tests/create_elements.spec.js',
+		'./../tests/login.spec.js'
+		// ,'./../tests/features/slackLogin.feature'
 	],
 	//
 	// ============
@@ -52,20 +54,20 @@ exports.config = {
 	// https://saucelabs.com/platform/platform-configurator
 	//
 	capabilities: [
-		// {
-		// 	browserName: 'chrome',
-		// 	'goog:chromeOptions': {
-		// 		args: ['--start-maximized', '--incognito', '--headless']
-		// 	}
-		// }
-		// ,
 		{
-		    browserName: 'firefox',
-		    'moz:firefoxOptions': {
-		        args: ['--start-maximized', '--private-window', '--headless'
-		        ]
-		    }
+			browserName: 'chrome',
+			'goog:chromeOptions': {
+				args: ['--start-maximized', '--incognito']//, '--headless']
+			}
 		}
+		// ,
+		// {
+		//     browserName: 'firefox',
+		//     'moz:firefoxOptions': {
+		//         args: ['--start-maximized', '--private-window'//, '--headless'
+		//         ]
+		//     }
+		// }
 		// ,
 		// {
 		//     browserName: 'msedge',
@@ -130,7 +132,7 @@ exports.config = {
 	//
 	// Make sure you have the wdio adapter package for the specific framework installed
 	// before running any tests.
-	framework: 'mocha',
+	framework: 'cucumber', // 'mocha',
 
 	// The number of times to retry the entire specfile when it fails as a whole
 	// specFileRetries: 1,
@@ -162,7 +164,10 @@ exports.config = {
 		ui: 'bdd',
 		timeout: 60000
 	},
-
+	cucumberOpts: {
+		require: ['src/tests/**/*.steps.js']//,
+		// ignoreUndefinedDefinitions: true
+	},
 	//
 	// =====
 	// Hooks
