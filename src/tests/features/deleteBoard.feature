@@ -1,5 +1,5 @@
 Feature: Deleting the first board in Trello
-
+@positive_scenario @delete
   Scenario: Delete the first board
     Given I am logged into my Trello account
     When I delete the first board

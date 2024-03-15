@@ -1,5 +1,5 @@
 Feature: Creating a new card on the first list of a Trello board
-
+  @positive_scenario @create
   Scenario: Create a new card on the first list
     Given I am logged into my Trello account
     When I create a new card on the first list of the board

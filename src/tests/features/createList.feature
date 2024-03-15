@@ -1,5 +1,5 @@
 Feature: Creating a new list on a Trello board
-
+  @positive_scenario @create
   Scenario: Create a new list on a board
     Given I am logged into my Trello account
     When I create a new list on a board

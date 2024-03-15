@@ -1,5 +1,5 @@
 Feature: Trello Sign-in page
-
+@positive_scenario @login
   Background:
     Given I am on the Trello Sign in Page
 
