@@ -1,11 +1,6 @@
 const { Given, When, Then} = require('@wdio/cucumber-framework');
 const loginPage = require('../../pageObjects/pages/login.page');
 
-
-Given('I am on the Sign-in Trello page', async function () {
-  await loginPage.openTrello();
-});
-
 Given('I login with Slack account {string}', async function (slackAccount) {
   await loginPage.loginWithSlack(slackAccount);
 });

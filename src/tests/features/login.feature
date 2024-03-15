@@ -6,6 +6,7 @@ Feature: Trello Sign-in page
   Scenario Outline: Sign in with <credential type> credentials
     When I sign in with '<credential type>' credentials
     Then I should see '<expected message>'
+    Then I logged out to session
 
     Examples:
       | credential type | expected message   |

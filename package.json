@@ -10,6 +10,7 @@
 		"prettier": "npx prettier . --write",
 		"login" : "wdio run src/config/wdio.conf.js --cucumberOpts.tagExpression=@login",
 		"create" : "wdio run src/config/wdio.conf.js --cucumberOpts.tagExpression=@create",
+		"card" : "wdio run src/config/wdio.conf.js --cucumberOpts.tagExpression=@card",
 		"delete" : "wdio run src/config/wdio.conf.js --cucumberOpts.tagExpression=@delete",
 		"negative" : "wdio run src/config/wdio.conf.js --cucumberOpts.tagExpression=@negative_scenario"
 	},

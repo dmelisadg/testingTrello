@@ -1,5 +1,5 @@
 Feature: Creating a new board in Trello
-@positive_scenario  @create
+@positive_scenario @create
   Scenario: Create a new board with a random name
     Given I am logged into my Trello account
     When I create a new board with a random name
