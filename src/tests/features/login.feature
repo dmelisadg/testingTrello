@@ -1,8 +1,8 @@
 Feature: Trello Sign-in page
-@positive_scenario @login
+
   Background:
     Given I am on the Trello Sign in Page
-
+  @positive_scenario @login
   Scenario Outline: Sign in with <credential type> credentials
     When I sign in with '<credential type>' credentials
     Then I should see '<expected message>'
