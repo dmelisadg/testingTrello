@@ -1,6 +1,7 @@
 class LoginSlack {
 	constructor() {
 		this.slackButton = 'a#slackButton.slack-button.oauth-button';
+		this.slackButtonAtlassian ='button#slack-auth-button'
 		this.slackInputWorkSpace = 'input[data-qa="signin_domain_input"]';
 		this.continueSlackButton = 'button[data-qa="submit_team_domain_button"]';
 		this.googleLoginLabel = 'span.c-google_login__label';

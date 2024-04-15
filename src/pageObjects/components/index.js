@@ -61,8 +61,15 @@ class Components {
 
 	// METHODS
 	async setCredentials(username, password) {
-		await this.waitAndSetValue(this.login.inputEmail, username);
-		await $(this.login.continue).click();
+		const emailInputAtlassian = await $(this.login.inputEmailAtlassian);
+		if (emailInputAtlassian) {
+			await this.waitAndSetValue(this.login.inputEmailAtlassian, username);
+			await $(this.login.loginButton).click();
+		}
+		else{
+			await this.waitAndSetValue(this.login.inputEmail, username);
+			await $(this.login.continue).click();
+		}
 		await this.waitAndSetValue(this.login.inputPassword, password);
 		await $(this.login.loginButton).click();
 	}
@@ -85,7 +92,13 @@ class Components {
 	}
 
 	async enableSlackLogin(workspace) {
-		await $(this.loginSlack.slackButton).click();
+		const slackButtonAtlassian = await $(this.loginSlack.slackButtonAtlassian);
+		if (slackButtonAtlassian) {
+			await slackButtonAtlassian.click();
+		}
+		else{
+			await $(this.loginSlack.slackButton).click();
+		}
 		await this.waitAndSetValue(this.loginSlack.slackInputWorkSpace, workspace);
 		await $(this.loginSlack.continueSlackButton).click();
 	}

@@ -1,5 +1,18 @@
 const loginPage = require('../pageObjects/pages/login.page');
+const createElements = require('../pageObjects/pages/create_elements.page')
 
+describe('Trello Sing-in page - Sign in as non-registered user', () => {
+	beforeEach(async () => {
+		await loginPage.openTrello();
+	});
+	it('Sign in as non-registered user', async () => {
+		const errorMessage = await loginPage.loginToTrello(
+			loginPage.randomCredentials().username,
+			loginPage.randomCredentials().password
+		);
+		expect(errorMessage).to.equal((await loginPage.titleMessages()).failedLogin);
+	});
+});
 describe('Trello Sing-in page', () => {
 	beforeEach(async () => {
 		await loginPage.openTrello();
@@ -11,16 +24,10 @@ describe('Trello Sing-in page', () => {
 		);
 		expect(titleWelcome).to.equal((await loginPage.titleMessages()).successLogin);
 	});
-
-	it('Sign in as non-registered user', async () => {
-		const errorMessage = await loginPage.loginToTrello(
-			loginPage.randomCredentials().username,
-			loginPage.randomCredentials().password
-		);
-		expect(errorMessage).to.equal((await loginPage.titleMessages()).failedLogin);
+	afterEach(async () => {
+		await createElements.endSession();
 	});
 });
-
 describe('Trello Sing-in page with Slack account', () => {
 	beforeEach(async () => {
 		await loginPage.openTrello();
@@ -39,4 +46,5 @@ describe('Trello Sing-in page with Slack account', () => {
 		);
 		expect(titleWelcome).to.equal((await loginPage.titleMessages()).successLogin);
 	});
+
 });
