@@ -1,7 +1,7 @@
 // This corrected code snippet is in JavaScript.
 const axios = require('axios');
 const chai = import('chai');
-const token ='sl.BxdtRBj7IIowZYdkfsKwIeWPBMZqsYLCPhjSZ7fW7-gUiu9Wlvesq7hY_e56PPNT-SpPj71rwqAEq5grfFTMaUXr2JB-1hWR88WVcb1zkjPJILVQqLCPGic-rqPaOJUtytgq6PS0ZPEof9MLsve8vJk'
+const token =''
 describe('DropboxAPI', async () => {
 	it('Upload a file to the API dropbox account', async () => {
 		const fileContent =
