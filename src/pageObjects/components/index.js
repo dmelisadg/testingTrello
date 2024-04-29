@@ -61,8 +61,15 @@ class Components {
 
 	// METHODS
 	async setCredentials(username, password) {
-		await this.waitAndSetValue(this.login.inputEmail, username);
-		await $(this.login.continue).click();
+		const emailInputAtlassian = await $(this.login.inputEmailAtlassian);
+		if (emailInputAtlassian) {
+			await this.waitAndSetValue(this.login.inputEmailAtlassian, username);
+			await $(this.login.loginButton).click();
+		}
+		else{
+			await this.waitAndSetValue(this.login.inputEmail, username);
+			await $(this.login.continue).click();
+		}
 		await this.waitAndSetValue(this.login.inputPassword, password);
 		await $(this.login.loginButton).click();
 	}
@@ -85,7 +92,13 @@ class Components {
 	}
 
 	async enableSlackLogin(workspace) {
-		await $(this.loginSlack.slackButton).click();
+		const slackButtonAtlassian = await $(this.loginSlack.slackButtonAtlassian);
+		if (slackButtonAtlassian) {
+			await slackButtonAtlassian.click();
+		}
+		else{
+			await $(this.loginSlack.slackButton).click();
+		}
 		await this.waitAndSetValue(this.loginSlack.slackInputWorkSpace, workspace);
 		await $(this.loginSlack.continueSlackButton).click();
 	}
@@ -177,18 +190,15 @@ class Components {
 		return await array[position];
 	}
 
-	async addNewList(listname) {
+	async addNewlist(listname) {
 		await $(this.board.addAList).click();
 		await $(this.board.inputListName).setValue(listname);
-		await this.waitClickableAndClick(this.board.addListButton)
-		// await $(this.board.addListButton).click();
+		await $(this.board.addListButton).click();
 	}
 
 	async addNewCard(cardname, list) {
 		const elementArray = await $(this.board.elementArray);
-		await elementArray.waitForExist({timeout:10000});
 		const addButtons = await elementArray.$$(this.board.addACard)[list];
-		await addButtons.waitForExist({timeout:10000});
 		await addButtons.click();
 		await $(this.board.inputCardName).setValue(cardname);
 		await $(this.board.addCardButton).click();
@@ -199,7 +209,6 @@ class Components {
 		const listsInBoard = await elementArray.$$(this.board.listsOfLists)[list];
 		const cardsInList = await listsInBoard.$$(this.board.li);
 		const lengthCardsInList = await cardsInList.length;
-		await browser.pause(2000)
 		return await cardsInList[lengthCardsInList - 1].getText();
 	}
 }

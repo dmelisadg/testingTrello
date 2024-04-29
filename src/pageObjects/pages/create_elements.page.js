@@ -38,7 +38,7 @@ class CreateElements {
 	async addNewList(board) {
 		await this.openBoard(board);
 		const listName = this.randomName();
-		await components.addNewList(listName);
+		await components.addNewlist(listName);
 		return listName;
 	}
 

@@ -6,8 +6,15 @@ Given('I am on the Trello Sign in Page', async function () {
 });
 
 When('I sign in with {string} credentials', async function (credentialType) {
-  const username = (credentialType === 'valid') ? loginPage.credentials().username : loginPage.randomCredentials().username;
-  const password = (credentialType === 'valid') ? loginPage.credentials().password : loginPage.randomCredentials().password;
+  let username, password;
+  if (credentialType === 'valid') {
+    username = loginPage.credentials().username;
+    password = loginPage.credentials().password;
+  } else {
+    username = loginPage.randomCredentials().username;
+    password = loginPage.randomCredentials().password;
+  }
+
   if (credentialType === 'valid') {
     this.titleWelcome = await loginPage.loginToTrello(username, password);
   } else {
@@ -16,10 +23,12 @@ When('I sign in with {string} credentials', async function (credentialType) {
 });
 
 Then('I should see {string}', async function (expectedMessage) {
-  const expectedTitle = (expectedMessage === 'Test MelisaDG (testmelisadg)') ? (await loginPage.titleMessages()).successLogin : (await loginPage.titleMessages()).failedLogin;
+  let expectedTitle;
   if (expectedMessage === 'Test MelisaDG (testmelisadg)') {
+    expectedTitle = (await loginPage.titleMessages()).successLogin;
     expect(this.titleWelcome).to.equal(expectedTitle);
   } else {
+    expectedTitle = (await loginPage.titleMessages()).failedLogin;
     expect(this.errorMessage).to.equal(expectedTitle);
   }
 });
